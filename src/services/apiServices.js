@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = "7df372b3c5464cf0a34f714b09927023"; // La tua chiave Spoonacular
+const API_KEY = import.meta.env.VITE_API_KEY;; // La tua chiave Spoonacular
 const BASE_URL = "https://api.spoonacular.com/recipes";
 
 /*
