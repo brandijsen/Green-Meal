@@ -3,12 +3,6 @@ import axios from "axios";
 const API_KEY = import.meta.env.VITE_API_KEY;; // La tua chiave Spoonacular
 const BASE_URL = "https://api.spoonacular.com/recipes";
 
-/*
-const apiKey = '7df372b3c5464cf0a34f714b09927023'
-const apiKey3 = 'cde97d25452548fb91a032b5355759a3';
-const apiKey2 = '62ceda901da5433e88277b56076302c5'
-*/
-
 export const getVegetarianRecipes = async (query, number = 12) => {
   try {
     const params = {
