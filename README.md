@@ -3,7 +3,7 @@
 A vegetarian recipe website developed using **React**, **Vite**, **Tailwind CSS**, **React Router**, and **Axios**.
 
 🌐 Live Demo
-🔗 [Green Meal - Live Website](https://whimsical-pithivier-7a0452.netlify.app/)
+🔗 [Green Meal - Live Website](https://greenmeal.netlify.app/)
 
 ## 🚀 **Technologies Used**
 - **[React](https://react.dev/)** - Library for building user interfaces
