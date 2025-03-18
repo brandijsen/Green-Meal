@@ -11,7 +11,6 @@ const HomePage = () => {
     const fetchRecipes = async () => {
       try {
         const vegetarianRecipes = await getRecipesByDiet(); 
-        console.log("Ricette recuperate:", vegetarianRecipes); 
         setRecipes(vegetarianRecipes); 
       } catch (error) {
         console.error("Errore durante il recupero delle ricette:", error);

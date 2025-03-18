@@ -5,7 +5,6 @@ const useScrollToTop = () => {
   const location = useLocation();
 
   useEffect(() => {
-    console.log('Navigating to:', location.pathname); 
     window.scrollTo(0, 0); 
   }, [location.pathname]); 
 };

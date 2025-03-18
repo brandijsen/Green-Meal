@@ -13,7 +13,6 @@ const SearchBar = () => {
   const suggestionsRef = useRef(null); 
 
   useEffect(() => {
-    console.log("Location changed:", location.pathname); 
     setQuery(""); 
   }, [location]); 
 

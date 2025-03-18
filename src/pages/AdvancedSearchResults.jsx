@@ -19,9 +19,6 @@ const AdvancedSearchResults = () => {
   ]
     .filter(Boolean) 
     .join(" | "); 
-
-
-
     
   return (
       <div className="container min-h-screen flex flex-col mx-auto px-20 mt-10 mb-20" id="container">
