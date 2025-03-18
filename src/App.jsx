@@ -15,14 +15,14 @@ const App = () => {
     <HashRouter>
       <Header/>
       <Routes>
-  <Route path="/" element={<Home />} />
-  <Route path="/advanced-search" element={<AdvancedSearch />} />
-  <Route path="/advanced-search-results" element={<AdvancedSearchResults />} />
-  <Route path="/search-results" element={<SearchResult />} />
-  <Route path="/recipes/:diet" element={<Diet />} />
-  <Route path="/:id" element={<Recipe />} /> {/* Modificata la rotta */}
-  <Route path="/similar-recipes" element={<SimilarRecipes />} />
-</Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/advanced-search" element={<AdvancedSearch />} />
+        <Route path="/advanced-search-results" element={<AdvancedSearchResults />} />
+        <Route path="/search-results" element={<SearchResult />} />
+        <Route path="/recipes/:diet" element={<Diet />} />
+        <Route path="/:id" element={<Recipe />} /> 
+        <Route path="/similar-recipes" element={<SimilarRecipes />} />
+      </Routes>
       <Footer/>
     </HashRouter>
   );

@@ -6,10 +6,10 @@
 
 body {
   font-family: 'Montserrat', sans-serif !important;
-  font-size: 16px; /* Dimensione del testo di base */
-  line-height: 1.6; /* Altezza delle righe leggibile */
-  color: black; /* Colore di testo predefinito */
-  background-color: #f9fafb !important; /* Colore di sfondo generale */
+  font-size: 16px; 
+  line-height: 1.6; 
+  color: black; 
+  background-color: #f9fafb !important;
   height: 100%;
 
 }
@@ -18,18 +18,16 @@ input:focus {
   outline: none;
 }
 
-/* Stile quando è selezionata */
 input[type="checkbox"]:checked {
-  background-color: #4caf50; /* Verde */
+  background-color: #4caf50; 
   border-color: #4caf50;
   position: relative;
 }
 
-/* Aggiunge la V bianca */
 input[type="checkbox"]:checked::after {
-  content: "✔"; /* Il simbolo di spunta */
+  content: "✔"; 
   font-size: 16px;
-  color: white; /* Bianco */
+  color: white; 
   position: absolute;
   top: 50%;
   left: 50%;
@@ -70,12 +68,8 @@ button:hover {
   color: white;
 }
 
- 
-/* tablet */
 
 @media (min-width: 821px) and (max-width: 1024px) {
-
-
 
 #container {
   padding-left: 40px;
@@ -130,7 +124,7 @@ button:hover {
     
 header {
   display: flex;
-  flex-direction: column; /* Dispone gli elementi in colonna */
+  flex-direction: column; 
   gap: 10px;
 }
 
@@ -165,10 +159,10 @@ header {
  
     header {
       display: flex;
-      flex-direction: column; /* Dispone gli elementi in colonna */
-      align-items: center; /* Centra gli elementi orizzontalmente */
-      justify-content: center; /* Centra gli elementi verticalmente */
-      gap: 1.5rem; /* Aggiungi spazio tra il logo e gli altri elementi */
+      flex-direction: column; 
+      align-items: center; 
+      justify-content: center; 
+      gap: 1.5rem; 
       padding: 1rem;
     }
 

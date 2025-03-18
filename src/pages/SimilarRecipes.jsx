@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import SmallRecipeCard from "../components/SmallRecipeCard.jsx";
@@ -8,10 +7,9 @@ import useScrollToTop from "../services/utils.js";
 const SimilarRecipes = () => {
   useScrollToTop()
   const location = useLocation();
-  const [detailedRecipes, setDetailedRecipes] = useState(null); // Initialize as null
-  const recipeId = location.state?.recipeId; // Starting recipe ID
-  const recipeTitle = location.state?.recipeTitle; // Starting recipe title
-
+  const [detailedRecipes, setDetailedRecipes] = useState(null); 
+  const recipeId = location.state?.recipeId; 
+  const recipeTitle = location.state?.recipeTitle; 
   useEffect(() => {
     const fetchSimilarAndDetails = async () => {
       try {
@@ -19,7 +17,7 @@ const SimilarRecipes = () => {
 
         if (!similarRecipes || similarRecipes.length === 0) {
           console.warn("No similar recipes found");
-          setDetailedRecipes([]); // Set state to an empty array to handle the message
+          setDetailedRecipes([]); 
           return;
         }
 
@@ -27,12 +25,11 @@ const SimilarRecipes = () => {
           similarRecipes.map((recipe) =>
             getRecipeInformation(recipe.id).catch((err) => {
               console.error(`Error with recipe ${recipe.id}:`, err);
-              return null; // Return null to avoid interruptions
+              return null; 
             })
           )
         );
 
-        // Filtra solo le ricette vegetariane
         const vegetarianRecipes = detailedData.filter(
           (data) => data !== null && data.vegetarian
         );
@@ -40,15 +37,15 @@ const SimilarRecipes = () => {
         setDetailedRecipes(vegetarianRecipes);
       } catch (error) {
         console.error("Error retrieving similar recipes:", error);
-        setDetailedRecipes([]); // Empty state in case of error
+        setDetailedRecipes([]); 
       }
     };
 
     if (recipeId) {
-      fetchSimilarAndDetails(); // Start fetching recipes
+      fetchSimilarAndDetails(); 
     } else {
       console.error("recipeId not found!");
-      setDetailedRecipes([]); // Empty state if ID is missing
+      setDetailedRecipes([]); 
     }
   }, [recipeId]);
 
@@ -61,7 +58,6 @@ const SimilarRecipes = () => {
           )}
         </h2>
         {detailedRecipes === null ? (
-          // Show nothing if the state is null
           <></>
         ) : detailedRecipes.length > 0 ? (
           <div className="grid grid-cols-4 gap-20 w-full" id="recipes-grid">

@@ -3,9 +3,8 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 
-// https://vite.dev/config/
 export default defineConfig({
-  base: '/', // Sostituisci con il nome del tuo repository
+  base: '/', 
 
   plugins: [react(),     
     tailwindcss(),

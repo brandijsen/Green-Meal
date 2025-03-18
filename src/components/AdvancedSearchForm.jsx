@@ -82,7 +82,7 @@ const AdvancedSearchForm = ({ onError }) => {
           placeholder="Enter a keyword..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          autoComplete="off"  // Disabilita l'autocompletamento
+          autoComplete="off"  
 
         />
       </div>
@@ -96,17 +96,14 @@ const AdvancedSearchForm = ({ onError }) => {
           placeholder="Enter ingredients, separated by comma..."
           value={excludeIngredients}
           onChange={(e) => setExcludeIngredients(e.target.value)}
-          autoComplete="off"  // Disabilita l'autocompletamento
-
+          autoComplete="off"  
         />
       </div>
 
 
       <div className="relative" ref={dietMenuRef}>
-  {/* Label */}
   <label className="block text-gray-700 font-medium mb-2">Diet</label>
 
-  {/* Selettore principale */}
   <div
     className="w-full p-3 border border-gray-300 rounded-md cursor-pointer flex items-center justify-between"
     onClick={() => setShowDietOptions(!showDietOptions)}
@@ -125,7 +122,6 @@ const AdvancedSearchForm = ({ onError }) => {
     </svg>
   </div>
 
-  {/* Menu delle opzioni */}
   {showDietOptions && (
     <div className="absolute w-full bg-white rounded-md mt-1 shadow-md z-10 overflow-hidden">
       {dietOptions.map((option) => (

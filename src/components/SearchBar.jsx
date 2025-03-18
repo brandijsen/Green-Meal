@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { getVegetarianRecipes } from "../services/apiServices";
-import { useNavigate, useLocation } from "react-router-dom"; // Importa useLocation
+import { useNavigate, useLocation } from "react-router-dom"; 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
@@ -9,13 +9,13 @@ const SearchBar = () => {
   const [suggestions, setSuggestions] = useState([]);
   const [fullResults, setFullResults] = useState([]);
   const navigate = useNavigate();
-  const location = useLocation(); // Aggiungi useLocation per monitorare la posizione corrente
-  const suggestionsRef = useRef(null); // Riferimento per il div delle opzioni suggerite
+  const location = useLocation(); 
+  const suggestionsRef = useRef(null); 
 
   useEffect(() => {
-    console.log("Location changed:", location.pathname); // Verifica che location cambi
-    setQuery(""); // Reset query quando cambia la location
-  }, [location]); // Si attiva quando cambia la location
+    console.log("Location changed:", location.pathname); 
+    setQuery(""); 
+  }, [location]); 
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(async () => {
@@ -40,10 +40,9 @@ const SearchBar = () => {
   }, [query]);
 
   useEffect(() => {
-    // Aggiungi l'evento click per chiudere i suggerimenti
     const handleClickOutside = (e) => {
       if (suggestionsRef.current && !suggestionsRef.current.contains(e.target)) {
-        setSuggestions([]); // Chiudi i suggerimenti
+        setSuggestions([]); 
       }
     };
 
@@ -56,16 +55,16 @@ const SearchBar = () => {
   const handleInputChange = (e) => setQuery(e.target.value);
 
   const handleSuggestionClick = (recipe) => {
-    setQuery(""); // Resetta l'input
-    setSuggestions([]); // Chiude i suggerimenti
+    setQuery(""); 
+    setSuggestions([]); 
     navigate(`/${encodeURIComponent(recipe.id)}`, { state: { recipe } });
   };
 
   const handleSearchClick = () => {
     if (query.trim() === "") return;
     
-    setQuery(""); // Resetta l'input
-    setSuggestions([]); // Chiude i suggerimenti
+    setQuery(""); 
+    setSuggestions([]); 
     navigate("/search-results", { state: { results: fullResults, query } });
   };
 

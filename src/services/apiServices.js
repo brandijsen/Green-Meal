@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = import.meta.env.VITE_API_KEY;; // La tua chiave Spoonacular
+const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = "https://api.spoonacular.com/recipes";
 
 export const getVegetarianRecipes = async (query, number = 12) => {
@@ -17,51 +17,46 @@ export const getVegetarianRecipes = async (query, number = 12) => {
 
     const response = await axios.get(`${BASE_URL}/complexSearch`, { params });
 
-    return { results: response.data.results }; // Ritorna un oggetto con "results"
+    return { results: response.data.results }; 
+
   } catch (error) {
     console.error("Errore nella chiamata API:", error);
-    return { results: [] }; // Ritorna un array vuoto in caso di errore
+    return { results: [] }; 
   }
 };
 
 
-
 export const getRecipesByDiet = async (diet) => {
   try {
-    let dietFilter = "vegetarian"; // Default dieta vegetariana
+    let dietFilter = "vegetarian"; 
     
     if (diet) {
       if (diet === "gluten free") {
-        dietFilter = "gluten free,vegetarian"; // Ricette senza glutine e vegetariane
+        dietFilter = "gluten free,vegetarian"; 
       } else if (diet === "dairy free") {
-        dietFilter = "dairy free,vegetarian"; // Ricette senza latticini e vegetariane
+        dietFilter = "dairy free,vegetarian"; 
       } else {
-        dietFilter = diet; // Se vegan o vegetarian è selezionato, usa direttamente la dieta
+        dietFilter = diet; 
       }
     }
 
     const params = {
       apiKey: API_KEY,
-      number: 12, // Numero di ricette richieste
+      number: 12, 
       tags: dietFilter,
     };
 
-    console.log("Fetching random recipes with params:", params);
-
     const response = await axios.get(`${BASE_URL}/random`, { params });
 
-    // Rimuovi il filtro sulle ricette
     const recipes = response.data.recipes;
 
-    console.log("Random recipes:", recipes);
-
     return recipes;
+
   } catch (error) {
     console.error("Errore nella chiamata API random:", error);
     throw error;
   }
 };
-
 
 
 export const getRecipesByFilters = async ({
@@ -74,7 +69,7 @@ export const getRecipesByFilters = async ({
   sort = '',
 }) => {
   try {
-    let dietFilter = "vegetarian"; // Assicura che il filtro sia sempre "vegetarian"
+    let dietFilter = "vegetarian"; 
 
     if (diet) {
       if (diet === "gluten free") {
@@ -98,16 +93,11 @@ export const getRecipesByFilters = async ({
       excludeIngredients,
     };
 
-    console.log("Fetching recipes with params:", params);
-
     const response = await axios.get(`${BASE_URL}/complexSearch`, { params });
 
-    // 🔴 Filtriamo manualmente eventuali ricette pescetariane 🔴
     const filteredRecipes = response.data.results.filter(
       (recipe) => !recipe.diets.includes("pescatarian")
     );
-
-    console.log("Filtered recipes (no pescetarian):", filteredRecipes);
 
     return filteredRecipes;
   } catch (error) {
@@ -117,22 +107,22 @@ export const getRecipesByFilters = async ({
 };
 
 
-
 export const getRecipeInformation = async (id) => {
   try {
     const response = await axios.get(`${BASE_URL}/${id}/information`, {
       params: {
         apiKey: API_KEY,
-        includeNutrition: true, // Include i dati nutrizionali
+        includeNutrition: true, 
       },
     });
-    console.log("Dettagli della ricetta:", response.data); // Log per debug
     return response.data;
+
   } catch (error) {
     console.error("Errore nel recupero delle informazioni della ricetta:", error);
-    throw error; // Propaga l'errore
+    throw error; 
   }
 };
+
 
 export const getSimilarRecipes = async (id) => {
   try {
@@ -142,9 +132,8 @@ export const getSimilarRecipes = async (id) => {
 
     const similarRecipes = response.data;
 
-    console.log("Raw similar recipes:", similarRecipes);
+    return similarRecipes; 
 
-    return similarRecipes; // Restituisce tutte le ricette
   } catch (error) {
     console.error("Errore nella chiamata getSimilarRecipes:", error);
     throw error;

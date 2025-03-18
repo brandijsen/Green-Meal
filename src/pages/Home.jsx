@@ -1,26 +1,25 @@
 import { useState, useEffect } from "react";
-import { getRecipesByDiet } from "../services/apiServices"; // Importa la tua funzione
-import SmallRecipeCard from "../components/SmallRecipeCard.jsx"; // Importa il componente
+import { getRecipesByDiet } from "../services/apiServices"; 
+import SmallRecipeCard from "../components/SmallRecipeCard.jsx"; 
 import useScrollToTop from "../services/utils.js";
 
 const HomePage = () => {
-  const [recipes, setRecipes] = useState([]); // Stato per memorizzare le ricette
+  const [recipes, setRecipes] = useState([]); 
   useScrollToTop();
 
   useEffect(() => {
-    // Funzione per ottenere le ricette vegetariane
     const fetchRecipes = async () => {
       try {
-        const vegetarianRecipes = await getRecipesByDiet(); // Chiama la funzione senza parametri
-        console.log("Ricette recuperate:", vegetarianRecipes); // Log delle ricette per il controllo
-        setRecipes(vegetarianRecipes); // Aggiorna lo stato con le ricette
+        const vegetarianRecipes = await getRecipesByDiet(); 
+        console.log("Ricette recuperate:", vegetarianRecipes); 
+        setRecipes(vegetarianRecipes); 
       } catch (error) {
         console.error("Errore durante il recupero delle ricette:", error);
       }
     };
 
-    fetchRecipes(); // Chiama la funzione al caricamento della pagina
-  }, []); // Array vuoto per chiamare solo al primo render
+    fetchRecipes(); 
+  }, []); 
 
   return (
       <div className="container min-h-screen flex flex-col mx-auto px-20 mt-10 mb-20" id="container">

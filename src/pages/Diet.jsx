@@ -6,17 +6,16 @@ import useScrollToTop from "../services/utils.js";
 
 const Diet = () => {
   useScrollToTop()
-  const { diet } = useParams(); // Ottieni il parametro "diet" dalla URL
+  const { diet } = useParams(); 
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const data = await getRecipesByDiet(diet); // Chiamata API per ottenere le ricette
+        const data = await getRecipesByDiet(diet); 
         setRecipes(data);
-        console.log("Ricette ricevute:", data); // Mostra le ricette in console
       } catch (err) {
-        console.error("Errore durante il caricamento delle ricette:", err); // Mostra l'errore in console
+        console.error("Errore durante il caricamento delle ricette:", err); 
       } 
     };
 

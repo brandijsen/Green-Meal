@@ -8,20 +8,17 @@ const AdvancedSearchResults = () => {
   const results = location.state?.results || [];
   const { query, diet, maxCalories, dishType, excludeIngredients, highHealthScore } = location.state || {};
 
-  // Log per fare il debug
-  console.log("Received Parameters:", { query, diet, maxCalories, dishType, excludeIngredients, highHealthScore });
 
-  // Costruzione dinamica del titolo basato sui parametri
   const selectedParameters = [
     query && `"${query}"`,
-    diet && `${diet}`,
-    maxCalories && `Max ${maxCalories} kcal`,
-    dishType && `${dishType}`,
     excludeIngredients && `exclude: ${excludeIngredients}`,
+    diet && `${diet}`,
+    dishType && `${dishType}`,
+    maxCalories && `Max ${maxCalories} kcal`,
     highHealthScore && "Healthy",
   ]
-    .filter(Boolean) // Rimuove i valori falsi (null, undefined, "")
-    .join(" | "); // Unisce i parametri con un separatore
+    .filter(Boolean) 
+    .join(" | "); 
 
 
 
