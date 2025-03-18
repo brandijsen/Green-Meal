@@ -49,7 +49,6 @@ For deployment, follow these steps:
 6- Deploy! 🎉
 
 📂 Project Structure
-bash
 
 /src
  ├── /components    # Reusable components
