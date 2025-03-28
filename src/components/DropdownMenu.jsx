@@ -2,41 +2,52 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const DropdownMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
-  const dropdownRef = useRef(null);
+  // State to manage dropdown visibility
+  const [isOpen, setIsOpen] = useState(false); 
 
-  const dietOptions = ["Vegan", "Vegetarian", "Gluten Free", "Dairy Free"];
+  // Hook to navigate to different routes
+  const navigate = useNavigate(); 
 
+  // Ref to track dropdown component
+  const dropdownRef = useRef(null); 
+
+  // List of diet options
+  const dietOptions = ["Vegan", "Vegetarian", "Gluten Free", "Dairy Free"]; 
+
+  // Handle selecting a diet option and navigate to its recipes
   const handleSelect = (diet) => {
-    setIsOpen(false);
-    navigate(`/recipes/${diet}`);
+    setIsOpen(false); // Close dropdown
+    navigate(`/recipes/${diet}`); 
   };
 
+  // Toggle dropdown visibility
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen); 
   };
 
+  // Close dropdown if clicked outside
   const handleClickOutside = (event) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setIsOpen(false);
+      setIsOpen(false); 
     }
   };
 
+  // Add event listener for outside click when component mounts
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside); 
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside); 
     };
   }, []);
 
   return (
     <div ref={dropdownRef} className="relative inline-block text-left" id='dropdown-button_container'>
+      {/* Dropdown button */}
       <button
         type="button"
         className="inline-flex justify-center w-full rounded-md border border-gray-300 bg-[#4CAF50] px-4 py-2 text-sm font-bold text-white cursor-pointer"
         id="dropdown-button"
-        onClick={toggleDropdown}
+        onClick={toggleDropdown} 
       >
         Recipes
         <svg
@@ -55,16 +66,18 @@ const DropdownMenu = () => {
         </svg>
       </button>
 
+      {/* Dropdown menu */}
       {isOpen && (
         <div
           className="origin-top-left absolute left-0 mt-1 w-full rounded-md shadow-lg bg-white  z-50 overflow-hidden"
           id="dropdown-menu"
         >
           <div>
+            {/* Map over diet options to create menu items */}
             {dietOptions.map((option) => (
               <div
                 key={option}
-                onClick={() => handleSelect(option.toLowerCase())}
+                onClick={() => handleSelect(option.toLowerCase())} 
                 className='text-left p-2 cursor-pointer' 
                 id='dropdown-option'
               >

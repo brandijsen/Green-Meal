@@ -12,9 +12,10 @@ import './App.css';
 
 const App = () => {
   return (
-    <HashRouter>
-      <Header/>
+    <HashRouter> 
+      <Header/>  
       <Routes>
+        {/* Define routes for different pages */}
         <Route path="/" element={<Home />} />
         <Route path="/advanced-search" element={<AdvancedSearch />} />
         <Route path="/advanced-search-results" element={<AdvancedSearchResults />} />

@@ -1,29 +1,32 @@
-import { useState, useEffect, useRef } from "react";
-import { getRecipesByFilters } from "../services/apiServices";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useRef } from "react"; 
+import { getRecipesByFilters } from "../services/apiServices"; 
+import { useNavigate } from "react-router-dom"; 
 
-const AdvancedSearchForm = ({ onError }) => {
-  const [query, setQuery] = useState("");
-  const [maxCalories, setMaxCalories] = useState("");
-  const [excludeIngredients, setExcludeIngredients] = useState("");
-  const [highHealthScore, setHighHealthScore] = useState(false);
-  const [diet, setDiet] = useState("");
-  const [dishType, setDishType] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [showDietOptions, setShowDietOptions] = useState(false);
+const AdvancedSearchForm = ({ onError }) => { 
+  // State variables for handling form inputs and states
+  const [query, setQuery] = useState(""); 
+  const [maxCalories, setMaxCalories] = useState(""); 
+  const [excludeIngredients, setExcludeIngredients] = useState(""); 
+  const [highHealthScore, setHighHealthScore] = useState(false); 
+  const [diet, setDiet] = useState(""); 
+  const [dishType, setDishType] = useState(""); 
+  const [errorMessage, setErrorMessage] = useState(""); 
+  const [showDietOptions, setShowDietOptions] = useState(false); 
   const [showDishTypeOptions, setShowDishTypeOptions] = useState(false);
 
-  const navigate = useNavigate();
-  const dietMenuRef = useRef(null);
+  const navigate = useNavigate(); 
+  const dietMenuRef = useRef(null); 
   const dishTypeMenuRef = useRef(null);
 
-  const dietOptions = ["Vegetarian", "Vegan", "Gluten-Free", "Dairy-Free"];
+  // Arrays holding available options for diet and dish types
+  const dietOptions = ["Vegetarian", "Vegan", "Gluten-Free", "Dairy-Free"]; 
   const dishTypeOptions = [
     "Main Course", "Side Dish", "Dessert", "Appetizer", "Salad",
     "Bread", "Breakfast", "Soup", "Beverage", "Sauce", 
     "Marinade", "Fingerfood", "Snack", "Drink"
   ];
 
+  // Function to handle clicks outside dropdowns to close them
   const handleClickOutside = (event) => {
     if (dietMenuRef.current && !dietMenuRef.current.contains(event.target)) {
       setShowDietOptions(false);
@@ -33,13 +36,16 @@ const AdvancedSearchForm = ({ onError }) => {
     }
   };
 
+  // Effect to add event listener for handling clicks outside dropdowns
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Function to validate the search input
   const validateSearch = () => query.trim() || diet.trim() || maxCalories || dishType.trim() || excludeIngredients.trim() || highHealthScore;
 
+  // Function to handle the search operation
   const handleSearch = async () => {
     if (!validateSearch()) {
       setErrorMessage("Please fill in at least one field.");
@@ -71,8 +77,10 @@ const AdvancedSearchForm = ({ onError }) => {
     }
   };
 
+  // Render the form UI with input fields and options
   return (
     <form className="space-y-6 max-w-lg mx-auto bg-white p-6 rounded-lg" >
+      {/* Input fields for search query and exclusions */}
       <div>
         <label htmlFor="searchQuery" className="block text-gray-700 font-medium mb-2">Keyword</label>
         <input
@@ -83,10 +91,10 @@ const AdvancedSearchForm = ({ onError }) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           autoComplete="off"  
-
         />
       </div>
 
+      {/* Input for excluding ingredients */}
       <div>
         <label htmlFor="excludeIngredients" className="block text-gray-700 font-medium mb-2">Exclude Ingredients</label>
         <input
@@ -100,77 +108,76 @@ const AdvancedSearchForm = ({ onError }) => {
         />
       </div>
 
-
+      {/* Diet selection dropdown */}
       <div className="relative" ref={dietMenuRef}>
-  <label className="block text-gray-700 font-medium mb-2">Diet</label>
-
-  <div
-    className="w-full p-3 border border-gray-300 rounded-md cursor-pointer flex items-center justify-between"
-    onClick={() => setShowDietOptions(!showDietOptions)}
-  >
-    <span className="text-left flex-1 no-transform">
-      {diet || "Select a diet"}
-    </span>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-5 w-5 text-gray-600"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-    </svg>
-  </div>
-
-  {showDietOptions && (
-    <div className="absolute w-full bg-white rounded-md mt-1 shadow-md z-10 overflow-hidden">
-      {dietOptions.map((option) => (
+        <label className="block text-gray-700 font-medium mb-2">Diet</label>
         <div
-          key={option}
-          className="p-2 cursor-pointer"
-          onClick={() => { 
-            setDiet(option);
-            setShowDietOptions(false);
-          }}
-          id="advanced-option"
+          className="w-full p-3 border border-gray-300 rounded-md cursor-pointer flex items-center justify-between"
+          onClick={() => setShowDietOptions(!showDietOptions)}
         >
-          {option}
+          <span className="text-left flex-1 no-transform">
+            {diet || "Select a diet"}
+          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 text-gray-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+          </svg>
         </div>
-      ))}
-    </div>
-  )}
-</div>
 
+        {/* Dropdown options for diet selection */}
+        {showDietOptions && (
+          <div className="absolute w-full bg-white rounded-md mt-1 shadow-md z-10 overflow-hidden">
+            {dietOptions.map((option) => (
+              <div
+                key={option}
+                className="p-2 cursor-pointer"
+                onClick={() => { 
+                  setDiet(option);
+                  setShowDietOptions(false);
+                }}
+                id="advanced-option"
+              >
+                {option}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-<div className="relative" ref={dishTypeMenuRef}>
-  <label className="block text-gray-700 font-medium mb-2">Dish Type</label>
-  <div
-    className="w-full p-3 border border-gray-300 rounded-md cursor-pointer flex items-center justify-between"
-    onClick={() => setShowDishTypeOptions(!showDishTypeOptions)}
-  >
-    <span className="text-left flex-1 no-transform">{dishType || "Select a dish type"}</span>
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-    </svg>
-  </div>
-  {showDishTypeOptions && (
-    <div className="absolute w-full bg-white rounded-md mt-1 shadow-md z-10 max-h-60 overflow-y-auto">
-      {dishTypeOptions.map((type) => (
+      {/* Dish type selection dropdown */}
+      <div className="relative" ref={dishTypeMenuRef}>
+        <label className="block text-gray-700 font-medium mb-2">Dish Type</label>
         <div
-          key={type}
-          className="p-2 cursor-pointer"
-          onClick={() => { setDishType(type); setShowDishTypeOptions(false); }}
-          id="advanced-option"
+          className="w-full p-3 border border-gray-300 rounded-md cursor-pointer flex items-center justify-between"
+          onClick={() => setShowDishTypeOptions(!showDishTypeOptions)}
         >
-          {type}
+          <span className="text-left flex-1 no-transform">{dishType || "Select a dish type"}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+          </svg>
         </div>
-      ))}
-    </div>
-  )}
-</div>
+        {showDishTypeOptions && (
+          <div className="absolute w-full bg-white rounded-md mt-1 shadow-md z-10 max-h-60 overflow-y-auto">
+            {dishTypeOptions.map((type) => (
+              <div
+                key={type}
+                className="p-2 cursor-pointer"
+                onClick={() => { setDishType(type); setShowDishTypeOptions(false); }}
+                id="advanced-option"
+              >
+                {type}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
-
-
+      {/* Input for maximum calories */}
       <div>
         <label htmlFor="maxCalories" className="block text-gray-700 font-medium mb-2">Calories</label>
         <input
@@ -184,6 +191,7 @@ const AdvancedSearchForm = ({ onError }) => {
         />
       </div>
 
+      {/* Checkbox for high health score filter */}
       <div className="flex items-center space-x-3">
         <label htmlFor="healthyScoreFilter" className="text-gray-700 font-medium">Healthy</label>
         <input
@@ -192,13 +200,14 @@ const AdvancedSearchForm = ({ onError }) => {
           checked={highHealthScore}
           onChange={(e) => setHighHealthScore(e.target.checked)}
           className="h-5 w-5 appearance-none border border-gray-300 rounded-md cursor-pointer"/>
-
       </div>
 
+      {/* Error message display */}
       {errorMessage && (
         <div className="text-red-500 text-sm mt-2">{errorMessage}</div>
       )}
 
+      {/* Search button */}
       <button
         type="button"
         className="w-full px-6 py-3 bg-[#4CAF50] text-white font-bold rounded-md border"

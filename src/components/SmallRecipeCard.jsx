@@ -1,24 +1,27 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { filterDiets, filterDishTypes } from "../services/utils";
+import { filterDiets, filterDishTypes } from "../services/utils"; 
 
 const SmallRecipeCard = ({ recipe }) => {
+  // State to manage hover effect
   const [isHovered, setIsHovered] = useState(false); 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook to navigate to a new route
 
+  // Handle card click to navigate to the recipe's details page
   const handleCardClick = () => {
-    navigate(`/${recipe.id}`, { state: { recipe } }); 
+    navigate(`/${recipe.id}`, { state: { recipe } });
   };
 
+  // Filter diets and dish types of the recipe
   const filteredDiets = recipe.diets ? filterDiets(recipe.diets) : [];
   const filteredDishTypes = recipe.dishTypes ? filterDishTypes(recipe.dishTypes) : [];
 
   return (
     <div
-    className="relative flex flex-col justify-between cursor-pointer text-center rounded-xl shadow-md transition-shadow duration-300 bg-white z-10"
-    onClick={handleCardClick}
-    id="recipe-card_small"
-  >
+      className="relative flex flex-col justify-between cursor-pointer text-center rounded-xl shadow-md transition-shadow duration-300 bg-white z-10"
+      onClick={handleCardClick} // Click handler to navigate to detailed recipe page
+      id="recipe-card_small"
+    >
       <img
         src={recipe.image}
         alt={recipe.title}
@@ -29,20 +32,21 @@ const SmallRecipeCard = ({ recipe }) => {
         <div className="relative flex justify-center w-full">
           <h5
             className="text-lg font-bold text-[#4CAF50] mb-2 px-2 text-center line-clamp-1 relative"
-            onMouseEnter={() => setIsHovered(true)}
+            onMouseEnter={() => setIsHovered(true)} // Hover effect for title
             onMouseLeave={() => setIsHovered(false)}
           >
             {recipe.title}
           </h5>
 
+          {/* Show title on hover */}
           {isHovered && (
             <div className="absolute top-full left-1/2 transform -translate-x-1/2 translate-y-[1px] bg-white text-black px-3 py-1 text-sm rounded-md z-50 shadow-lg whitespace-nowrap border border-gray-300">
-            {recipe.title}
+              {recipe.title}
             </div>
           )}
         </div>
 
-
+        {/* Display diet information */}
         <div className="flex flex-wrap justify-center gap-4 mt-2 h-[24px]">
           {filteredDiets.length > 0 ? (
             filteredDiets.map((diet) => (
@@ -50,12 +54,13 @@ const SmallRecipeCard = ({ recipe }) => {
                 key={diet}
                 className="text-sm text-gray-700 capitalize font-medium"
               >
-               {diet}
+                {diet}
               </span>
             ))
           ) : null}
         </div>
 
+        {/* Display dish type information */}
         <div className="flex flex-wrap justify-center gap-1 mt-2 h-[24px]">
           {filteredDishTypes.length > 0 ? (
             <span className="text-sm text-gray-500 capitalize font-medium">

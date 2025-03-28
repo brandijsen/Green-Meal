@@ -1,0 +1,10 @@
+- onError advserch V
+- variabili ambientali V
+- aggiorna readme V
+- presentazione
+- commenti
+- suggestion devono chiudersi quando cliccati (smartphone) V
+- pagine devono aprirsi in alto V
+- dotenv V
+- open graph 
+- controlla che useScrollTop sulla pagina Recipe V

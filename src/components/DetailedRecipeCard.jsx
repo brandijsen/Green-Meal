@@ -1,5 +1,6 @@
-import { filterDiets, filterDishTypes } from "../services/utils"; // Assicurati di importare filterDishTypes
+import { filterDiets, filterDishTypes } from "../services/utils"; 
 
+// Function to capitalize the first letter of each word in a string
 const capitalizeFirstLetter = (str) => {
   return str
     .split(" ")
@@ -8,19 +9,24 @@ const capitalizeFirstLetter = (str) => {
 };
 
 const DetailedRecipeCard = ({ recipe }) => {
+  // Filter diets and dish types based on the recipe's data
   const filteredDiets = recipe.diets ? filterDiets(recipe.diets) : [];
   const filteredDishTypes = recipe.dishTypes ? filterDishTypes(recipe.dishTypes) : [];
 
+  // Define the required nutrients to display
   const requiredNutrients = ["Calories", "Protein", "Fat", "Saturated Fat", "Carbohydrates"];
+  // Filter the nutrients to show only the required ones
   const filteredNutrients = recipe.nutrition.nutrients?.filter(nutrient =>
     requiredNutrients.includes(nutrient.name)
   );
 
+  // Find the saturated fat from the filtered nutrients
   const saturatedFat = filteredNutrients.find(nutrient => nutrient.name === "Saturated Fat");
 
   return (
     <div className="max-w-screen-lg mx-auto p-6 bg-white shadow-lg rounded-xl">
 
+      {/* Recipe Image and Title */}
       <div className="relative w-full h-[400px] rounded-lg overflow-hidden mb-6">
         <img
           src={recipe.image}
@@ -32,6 +38,7 @@ const DetailedRecipeCard = ({ recipe }) => {
         </h2>
       </div>
 
+      {/* Recipe Details: General Info, Ingredients, and Nutrition */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="p-4 border-r border-gray-300">
           <h4 className="text-xl font-semibold text-[#4CAF50] mb-2">General</h4>
@@ -75,6 +82,7 @@ const DetailedRecipeCard = ({ recipe }) => {
         </div>
       </div>
 
+      {/* Preparation Steps */}
       <div className="mt-6 p-4 bg-gray-100 rounded-lg">
         <h4 className="text-xl font-semibold text-[#4CAF50] mb-3">Preparation</h4>
         {recipe.analyzedInstructions[0]?.steps.map((step, idx) => (
